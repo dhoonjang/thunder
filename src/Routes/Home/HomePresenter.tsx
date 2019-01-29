@@ -4,6 +4,9 @@ import Sidebar from "react-sidebar";
 import styled from "src/typed-components";
 import Menu from "src/Components/Menu";
 import Main from "src/Components/Main";
+import Button from "src/Components/Button";
+import Male from "src/images/maleicon.svg";
+import Female from "src/images/femaleicon.svg";
 
 const Container = styled.div``;
 
@@ -30,37 +33,79 @@ const MenuButton = styled.button`
   background-color: transparent;
 `;
 
+const Body = styled.div`
+  padding: 15px;
+`
+const SButton = styled(Button)`
+  margin-top: 50px;
+`
+const Name = styled.div`
+  margin: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 15px;
+`
+const SSpan = styled.span`
+  font-size: 16px;
+  font-weight: 800;
+`
+const Info = styled.div`
+  fonst-size: 16px;
+  margin: 15px;
+`
+const Icon = styled.img`
+  width: 18px;
+`
+
 interface IProps {
   isMenuOpen: boolean;
   toggleMenu: any;
   mapRef: any;
 }
+
 const HomePresenter: React.SFC<IProps> = ({
   isMenuOpen,
   toggleMenu,
   mapRef
-}) => (
-  <Container>
-    <Helmet>
-      <title>Home | Thunder</title>
-    </Helmet>
-    <Sidebar
-      sidebar={<Menu/>}
-      open={isMenuOpen}
-      onSetOpen={toggleMenu}
-      styles={{
-        sidebar: {
-          backgroundColor: "white",
-          width: "200px",
-          zIndex: "10"
-        }
-      }}
-    >
-      <MenuButton onClick={toggleMenu}>|||</MenuButton>
-    </Sidebar>
-    <Map ref={mapRef} />
-    <Main />
-  </Container>
-);
+}) => {
+  const gender = "male";
+  const isVerified = true;
+  const age = 21;
+  const name = "ㅇㅇㅂ";
+
+  return (
+    <Container>
+      <Helmet>
+        <title>Home | Thunder</title>
+      </Helmet>
+      <Sidebar
+        sidebar={<Menu />}
+        open={isMenuOpen}
+        onSetOpen={toggleMenu}
+        styles={{
+          sidebar: {
+            backgroundColor: "white",
+            width: "200px",
+            zIndex: "10"
+          }
+        }}
+      >
+        <MenuButton onClick={toggleMenu}>|||</MenuButton>
+      </Sidebar>
+      <Map ref={mapRef} />
+      <Main>
+        <Body>
+          <Name>{name} 님</Name>
+          <Info>성별: {gender === "male" ?
+            <SSpan>남성 <Icon src={Male} /></SSpan> : <SSpan>여성 <Icon src={Female} /></SSpan>
+          }</Info>
+          <Info>나이: <SSpan>{age}</SSpan></Info>
+          <Info>인증여부: {isVerified ? <SSpan>O</SSpan> : <SSpan>X</SSpan>} </Info>
+        </Body>
+        <SButton value="Start" />
+      </Main>
+    </Container>
+  )
+};
 
 export default HomePresenter;
