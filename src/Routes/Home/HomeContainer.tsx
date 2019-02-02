@@ -1,7 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { RouteComponentProps } from "react-router";
 import HomePresenter from "./HomePresenter";
+import { loadMap } from "src/utils/MapFunctions";
 
 interface IProps extends RouteComponentProps<any> {
   google: any;
@@ -21,7 +21,7 @@ class HomeContainer extends React.Component<IProps, IState> {
     this.mapRef = React.createRef();
   }
   public componentDidMount() {
-    this.loadMap(37.2799,127.0443);
+    loadMap(37.2799,127.0443, this.map, this.mapRef, this.props.google);
   }
   public render() {
     const {isMenuOpen} = this.state;
@@ -39,25 +39,6 @@ class HomeContainer extends React.Component<IProps, IState> {
         isMenuOpen: !state.isMenuOpen
       };
     });
-  };
-
-  public loadMap = (lat, lng) => {
-    const { google } = this.props;
-    const maps = google.maps;
-    const mapNode = ReactDOM.findDOMNode(this.mapRef.current);
-    if (!mapNode) {
-      this.loadMap(lat, lng);
-      return;
-    }
-    const mapConfig: google.maps.MapOptions = {
-      center: {
-        lat,
-        lng
-      },
-      disableDefaultUI: true,
-      zoom: 16.7
-    };
-    this.map = new maps.Map(mapNode, mapConfig);
   };
 }
 

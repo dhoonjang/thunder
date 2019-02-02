@@ -26,10 +26,13 @@ const Header = styled.div`
   padding: 13px;
   color: ${props => props.theme.blackColor}
 `
+interface IProps {
+  className?: string;
+}
 
-const MainPresenter: React.SFC = ({children}) => {
+const MainPresenter: React.SFC<IProps> = ({ className, children}) => {
   return (
-    <Container>
+    <Container className={className}>
       <Header>thunder</Header>
       {children}
     </Container>

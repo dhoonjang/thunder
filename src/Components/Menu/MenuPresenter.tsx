@@ -76,6 +76,7 @@ const MenuPresenter: React.SFC<IProps> = ({
         </Header>
         <SLink to="/edit-account">Edit Account</SLink>
         <SLink to="/settings">Settings</SLink>
+        <button>Log Out</button>
         <AddPlace value={"Add Place"} onClick={null} />
       </>
     )}
