@@ -1,15 +1,16 @@
 import React from "react";
-import LoginPresenter from "./LogInPresenter";
+import SigninPresenter from "./SignUpPresenter";
 import { loadMap } from "src/utils/MapFunctions";
 
 interface IProps {
   google: any;
 }
-class LoginContainer extends React.Component<IProps> {
+class SigninContainer extends React.Component<IProps> {
   public mapRef: any;
   public map: google.maps.Map;
   public state = {
     email: "",
+    name: "",
     password: ""
   }
   constructor(props){
@@ -20,16 +21,18 @@ class LoginContainer extends React.Component<IProps> {
     loadMap(37.2799,127.0443, this.map, this.mapRef, this.props.google);
   }
   public render() {
-    const {email, password} = this.state;
+    const {email,name,password} = this.state;
     return(
-      <LoginPresenter 
+      <SigninPresenter 
+        mapRef={this.mapRef}
         email={email}
+        name={name}
         password={password}
-        mapRef={this.mapRef} 
         onInputChange={this.onInputChange}
       />
     )
   }
+
   public onInputChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLSelectElement
   > = (event) => {
@@ -40,6 +43,7 @@ class LoginContainer extends React.Component<IProps> {
       [name]: value
     } as any);
   };
+
 }
 
-export default LoginContainer;
+export default SigninContainer;

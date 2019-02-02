@@ -20,6 +20,7 @@ const RadioBox = styled.div`
   padding-left: 20px;
   width: 100%;
   background-color: white;
+  color: ${props=>props.theme.blackColor}
   margin-bottom: 10px;
 `
 const RadioLabel = styled.label`
@@ -51,30 +52,40 @@ const SMain = styled(Main)`
 `
 
 interface IProps {
+  name: string;
+  password: string;
+  email: string;
   mapRef: any;
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }
-const SigninPresenter: React.SFC<IProps> = ({mapRef}) => {
+const SigninPresenter: React.SFC<IProps> = ({
+  name,
+  password,
+  email,
+  mapRef,
+  onInputChange
+}) => {
   return (
     <Container>
       <Helmet>
-        <title>Log In | Thunder</title>
+        <title>Sign Up | Thunder</title>
       </Helmet>
       <Map ref={mapRef} />
       <SMain>
         <SForm submitFn={null}>
-          <SInput placeholder={"NAME"} value={""} name={"email"} onChange={null}/>
-          <SInput placeholder={"E-MAIL"} value={""} name={"email"} onChange={null}/>
-          <SInput type={"password"} placeholder={"PASSWORD"} value={""} name={"password"} onChange={null}/>
+          <SInput placeholder={"NAME"} value={name} name={"name"} onChange={onInputChange}/>
+          <SInput placeholder={"E-MAIL"} value={email} name={"email"} onChange={onInputChange}/>
+          <SInput type={"password"} placeholder={"PASSWORD"} value={password} name={"password"} onChange={onInputChange}/>
           <RadioBox>
             GENDER:
             <RadioLabel>
-              Male <RadioButton type={"radio"} value={"male"} name={"gender"} onChange={null}/>
+              Male <RadioButton type={"radio"} value={"male"} name={"gender"} onChange={onInputChange}/>
             </RadioLabel>
             <RadioLabel>
-              Female <RadioButton type={"radio"} value={"female"} name={"gender"} onChange={null}/>
+              Female <RadioButton type={"radio"} value={"female"} name={"gender"} onChange={onInputChange}/>
             </RadioLabel>
           </RadioBox>
-          <SButton value="Sign In" />
+          <SButton value="Sign Up" />
         </SForm>
         
       </SMain>

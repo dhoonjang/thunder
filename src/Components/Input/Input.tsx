@@ -48,6 +48,7 @@ const Input : React.SFC<IProps> = ({
     value={value} 
     placeholder={placeholder} 
     name={name}
+    autoComplete={"off"}
   />
 );
 

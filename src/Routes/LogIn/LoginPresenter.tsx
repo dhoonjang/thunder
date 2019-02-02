@@ -38,9 +38,12 @@ const SMain = styled(Main)`
 `
 
 interface IProps {
+  password: string;
+  email: string;
   mapRef: any;
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }
-const LoginPresenter: React.SFC<IProps> = ({mapRef}) => {
+const LoginPresenter: React.SFC<IProps> = ({mapRef, password, email, onInputChange}) => {
   return (
     <Container>
       <Helmet>
@@ -49,11 +52,11 @@ const LoginPresenter: React.SFC<IProps> = ({mapRef}) => {
       <Map ref={mapRef} />
       <SMain>
         <SForm submitFn={null}>
-          <SInput placeholder={"E-MAIL"} value={""} name={"email"} onChange={null}/>
-          <SInput type={"password"} placeholder={"PASSWORD"} value={""} name={"password"} onChange={null}/>
+          <SInput placeholder={"E-MAIL"} value={email} name={"email"} onChange={onInputChange}/>
+          <SInput type={"password"} placeholder={"PASSWORD"} value={password} name={"password"} onChange={onInputChange}/>
           <SButton value="Log In" />
         </SForm>
-        <Link to="/signin"><SignButton value="Sign In" /></Link>
+        <Link to="/signup"><SignButton value="Sign Up" /></Link>
       </SMain>
     </Container>
   )
