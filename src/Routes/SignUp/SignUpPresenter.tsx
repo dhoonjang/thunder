@@ -5,6 +5,7 @@ import Button from "src/Components/Button";
 import styled from "src/typed-components";
 import Form from "src/Components/Form";
 import Input from "src/Components/Input";
+import { MutationFn } from "react-apollo";
 
 const Container = styled.div``;
 const Map = styled.div`
@@ -57,13 +58,15 @@ interface IProps {
   email: string;
   mapRef: any;
   onInputChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  submitFn: MutationFn;
 }
 const SigninPresenter: React.SFC<IProps> = ({
   name,
   password,
   email,
   mapRef,
-  onInputChange
+  onInputChange,
+  submitFn
 }) => {
   return (
     <Container>
@@ -72,7 +75,7 @@ const SigninPresenter: React.SFC<IProps> = ({
       </Helmet>
       <Map ref={mapRef} />
       <SMain>
-        <SForm submitFn={null}>
+        <SForm submitFn={submitFn}>
           <SInput placeholder={"NAME"} value={name} name={"name"} onChange={onInputChange}/>
           <SInput placeholder={"E-MAIL"} value={email} name={"email"} onChange={onInputChange}/>
           <SInput type={"password"} placeholder={"PASSWORD"} value={password} name={"password"} onChange={onInputChange}/>
@@ -87,7 +90,6 @@ const SigninPresenter: React.SFC<IProps> = ({
           </RadioBox>
           <SButton value="Sign Up" />
         </SForm>
-        
       </SMain>
     </Container>
   )

@@ -61,18 +61,19 @@ interface IProps {
   isMenuOpen: boolean;
   toggleMenu: any;
   mapRef: any;
+  data: any;
+  loading: boolean;
 }
 
 const HomePresenter: React.SFC<IProps> = ({
   isMenuOpen,
   toggleMenu,
-  mapRef
+  mapRef,
+  data,
+  loading
 }) => {
-  const gender = "male";
-  const isVerified = true;
-  const age = 21;
-  const name = "ㅇㅇㅂ";
-
+  const { GetMyProfile = {} } = data;
+  const { user = null } = GetMyProfile;
   return (
     <Container>
       <Helmet>
@@ -90,17 +91,17 @@ const HomePresenter: React.SFC<IProps> = ({
           }
         }}
       >
-        <MenuButton onClick={toggleMenu}>|||</MenuButton>
+        {!loading ? <MenuButton onClick={toggleMenu}>|||</MenuButton> : "loading"}
       </Sidebar>
       <Map ref={mapRef} />
       <Main>
         <Body>
-          <Name>{name} 님</Name>
-          <Info>성별: {gender === "male" ?
-            <SSpan>남성 <Icon src={Male} /></SSpan> : <SSpan>여성 <Icon src={Female} /></SSpan>
+          <Name>{!loading? user.name : "loading"} 님</Name>
+          <Info>성별: {!loading? (user.gender === "male" ?
+            <SSpan>남성 <Icon src={Male} /></SSpan> : <SSpan>여성 <Icon src={Female} /></SSpan>): "loading"
           }</Info>
-          <Info>나이: <SSpan>{age}</SSpan></Info>
-          <Info>인증여부: {isVerified ? <SSpan>O</SSpan> : <SSpan>X</SSpan>} </Info>
+          <Info>나이: <SSpan>{!loading? user.age : "loading"}</SSpan></Info>
+          <Info>인증여부: {!loading? (user.isVerified ? <SSpan>O</SSpan> : <SSpan>X</SSpan>) : "loading"} </Info>
         </Body>
         <SButton value="Start" />
       </Main>

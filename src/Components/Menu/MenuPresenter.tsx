@@ -26,8 +26,20 @@ const SLink = styled(Link)`
   font-weight: 400;
 `;
 
+const LogOutLink = styled.span`
+  font-size: 15px;
+  color: ${props=>props.theme.greenColor}
+  display: block;
+  margin-top: 50px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  cursor: pointer;
+`;
 
-const Name = styled.h2`
+
+const Name = styled(Link)`
+  display: block;
   font-size: 21px;
   padding-top: 20px;
   color: white;
@@ -36,7 +48,6 @@ const Name = styled.h2`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-
 
 const AddPlace = styled(Button)`
   -webkit-appearance: none;
@@ -55,14 +66,12 @@ const Icon = styled.img`
 `
 
 interface IProps {
-  name: string;
-  gender: string;
   loading: boolean;
+  data: any;
 }
 
 const MenuPresenter: React.SFC<IProps> = ({
-  name,
-  gender,
+  data,
   loading
 }) => (
   <Container>
@@ -70,13 +79,13 @@ const MenuPresenter: React.SFC<IProps> = ({
       (
       <>
         <Header>
-          <Name>
-            {name} <Icon src={gender==="male" ? Male : Female }/>
+          <Name to="/">
+            {data.GetMyProfile.user.name} <Icon src={data.GetMyProfile.user.gender==="male" ? Male : Female }/>
           </Name>
         </Header>
         <SLink to="/edit-account">Edit Account</SLink>
         <SLink to="/settings">Settings</SLink>
-        <button>Log Out</button>
+        <LogOutLink>Log Out</LogOutLink>
         <AddPlace value={"Add Place"} onClick={null} />
       </>
     )}
