@@ -58,7 +58,7 @@ const LoginPresenter: React.SFC<IProps> = ({
         <title>Log In | Thunder</title>
       </Helmet>
       <Map ref={mapRef} />
-      <SMain>
+      <SMain title={"Log In"}>
         <SForm submitFn={submitFn}>
           <SInput placeholder={"E-MAIL"} value={email} name={"email"} onChange={onInputChange}/>
           <SInput type={"password"} placeholder={"PASSWORD"} value={password} name={"password"} onChange={onInputChange}/>

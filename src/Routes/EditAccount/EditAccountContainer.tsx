@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { loadMap } from "src/utils/MapFunctions";
 
 interface IState {
+  isMenuOpen: boolean;
   name: string;
   gender: string;
   age: number | null;
@@ -31,6 +32,7 @@ class EditAccountContainer extends React.Component<IProps, IState> {
   public mapRef: any;
   public map: google.maps.Map;
   public state = {
+    isMenuOpen: false,
     name: "",
     age: null,
     email: "",
@@ -44,7 +46,7 @@ class EditAccountContainer extends React.Component<IProps, IState> {
     loadMap(37.2799, 127.0443, this.map, this.mapRef, this.props.google);
   }
   public render() {
-    const { email, name, age, gender } = this.state;
+    const { email, name, age, gender, isMenuOpen } = this.state;
     return (
       <ProfileQuery
         query={USER_PROFILE}
@@ -72,6 +74,7 @@ class EditAccountContainer extends React.Component<IProps, IState> {
           >
             {(updateProfileFn, { loading }) => (
               <EditAccountPresenter
+                isMenuOpen={isMenuOpen}
                 mapRef={this.mapRef}
                 email={email}
                 name={name}
@@ -80,6 +83,7 @@ class EditAccountContainer extends React.Component<IProps, IState> {
                 onInputChange={this.onInputChange}
                 loading={loading}
                 onSubmit={updateProfileFn}
+                toggleMenu={this.toggleMenu}
               />
             )}
           </UpdateProfileMutation>
@@ -115,6 +119,14 @@ class EditAccountContainer extends React.Component<IProps, IState> {
         }
       }
     }
+  };
+
+  public toggleMenu = () => {
+    this.setState(state => {
+      return {
+        isMenuOpen: !state.isMenuOpen
+      };
+    });
   };
 }
 

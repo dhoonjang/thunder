@@ -6,6 +6,8 @@ import Form from "../../Components/Form";
 import Input from "../../Components/Input";
 import styled from "../../typed-components";
 import Main from "src/Components/Main";
+import Sidebar from "react-sidebar";
+import Menu from "src/Components/Menu";
 
 const Container = styled.div``;
 const Map = styled.div`
@@ -22,6 +24,21 @@ const ExtendedInput = styled(Input)`
   padding-left: 20px;
   margin-bottom: 10px;
 `;
+const MenuButton = styled.button`
+  appearance: none;
+  padding: 10px;
+  position: absolute;
+  top: 00px;
+  left: 10px;
+  text-align: center;
+  font-weight: 800;
+  border: 0;
+  cursor: pointer;
+  font-size: 20px;
+  transform: rotate(90deg);
+  z-index: 2;
+  background-color: transparent;
+`;
 
 interface IProps {
   name: string;
@@ -32,6 +49,8 @@ interface IProps {
   onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   loading: boolean;
   mapRef: any;
+  isMenuOpen: boolean;
+  toggleMenu: any;
 }
 
 const EditAccountPresenter: React.SFC<IProps> = ({
@@ -42,14 +61,30 @@ const EditAccountPresenter: React.SFC<IProps> = ({
   email,
   onSubmit,
   onInputChange,
-  loading
+  loading,
+  isMenuOpen,
+  toggleMenu
 }) => (
     <Container>
       <Helmet>
         <title>Edit Account | Number</title>
       </Helmet>
+      <Sidebar
+        sidebar={<Menu />}
+        open={isMenuOpen}
+        onSetOpen={toggleMenu}
+        styles={{
+          sidebar: {
+            backgroundColor: "white",
+            width: "200px",
+            zIndex: "10"
+          }
+        }}
+      >
+        {!loading ? <MenuButton onClick={toggleMenu}>|||</MenuButton> : "loading"}
+      </Sidebar>
       <Map ref={mapRef} />
-      <Main>
+      <Main title={"Edit Account"}>
         <ExtendedForm submitFn={onSubmit}>
           <ExtendedInput
             onChange={onInputChange}

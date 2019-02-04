@@ -28,12 +28,13 @@ const Header = styled.div`
 `
 interface IProps {
   className?: string;
+  title: string;
 }
 
-const MainPresenter: React.SFC<IProps> = ({ className, children}) => {
+const MainPresenter: React.SFC<IProps> = ({ title, className, children}) => {
   return (
     <Container className={className}>
-      <Header>thunder</Header>
+      <Header>{title}</Header>
       {children}
     </Container>
   )

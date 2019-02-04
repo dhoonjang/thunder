@@ -74,7 +74,7 @@ const SigninPresenter: React.SFC<IProps> = ({
         <title>Sign Up | Thunder</title>
       </Helmet>
       <Map ref={mapRef} />
-      <SMain>
+      <SMain title={"Sign Up"}>
         <SForm submitFn={submitFn}>
           <SInput placeholder={"NAME"} value={name} name={"name"} onChange={onInputChange}/>
           <SInput placeholder={"E-MAIL"} value={email} name={"email"} onChange={onInputChange}/>

@@ -94,7 +94,7 @@ const HomePresenter: React.SFC<IProps> = ({
         {!loading ? <MenuButton onClick={toggleMenu}>|||</MenuButton> : "loading"}
       </Sidebar>
       <Map ref={mapRef} />
-      <Main>
+      <Main title={"thunder"}>
         <Body>
           <Name>{!loading? user.name : "loading"} 님</Name>
           <Info>성별: {!loading? (user.gender === "male" ?
