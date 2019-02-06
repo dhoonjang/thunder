@@ -12,6 +12,7 @@ export const USER_PROFILE = gql`
         gender
         isVerified
         isMatched
+        introduction
         age
       }
     }

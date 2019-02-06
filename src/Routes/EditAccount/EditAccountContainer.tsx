@@ -12,8 +12,9 @@ interface IState {
   isMenuOpen: boolean;
   name: string;
   gender: string;
-  age: number | null;
+  age: string | null;
   email: string;
+  introduction: string | null;
 }
 
 interface IProps extends RouteComponentProps<any> { 
@@ -36,7 +37,8 @@ class EditAccountContainer extends React.Component<IProps, IState> {
     name: "",
     age: null,
     email: "",
-    gender: ""
+    gender: "",
+    introduction: ""
   };
   constructor(props) {
     super(props);
@@ -46,7 +48,7 @@ class EditAccountContainer extends React.Component<IProps, IState> {
     loadMap(37.2799, 127.0443, this.map, this.mapRef, this.props.google);
   }
   public render() {
-    const { email, name, age, gender, isMenuOpen } = this.state;
+    const { email, name, age, gender, isMenuOpen, introduction } = this.state;
     return (
       <ProfileQuery
         query={USER_PROFILE}
@@ -69,23 +71,27 @@ class EditAccountContainer extends React.Component<IProps, IState> {
               email,
               name,
               gender,
-              age
+              age,
+              introduction
             }}
           >
-            {(updateProfileFn, { loading }) => (
-              <EditAccountPresenter
-                isMenuOpen={isMenuOpen}
-                mapRef={this.mapRef}
-                email={email}
-                name={name}
-                gender={gender}
-                age={age}
-                onInputChange={this.onInputChange}
-                loading={loading}
-                onSubmit={updateProfileFn}
-                toggleMenu={this.toggleMenu}
-              />
-            )}
+            {(updateProfileFn, { loading }) => {
+              return (
+                <EditAccountPresenter
+                  isMenuOpen={isMenuOpen}
+                  mapRef={this.mapRef}
+                  email={email}
+                  name={name}
+                  gender={gender}
+                  introduction={introduction}
+                  age={age}
+                  onInputChange={this.onInputChange}
+                  loading={loading}
+                  onSubmit={updateProfileFn}
+                  toggleMenu={this.toggleMenu}
+                />
+              )
+            }}
           </UpdateProfileMutation>
         )}
       </ProfileQuery>
@@ -95,7 +101,6 @@ class EditAccountContainer extends React.Component<IProps, IState> {
     const {
       target: { name, value }
     } = event;
-
     this.setState({
       [name]: value
     } as any);
@@ -107,15 +112,20 @@ class EditAccountContainer extends React.Component<IProps, IState> {
         GetMyProfile: { user }
       } = data;
       if (user !== null) {
-        const { name, email, gender } = user;
-        if (this.queryFinished < 5) {
+        const { name, email, gender, age, introduction } = user;
+        if (this.queryFinished < 3) {
           this.queryFinished=this.queryFinished+1;
+          if(age){
+            this.setState({
+              age: age.toString()
+            })
+          }
           this.setState({
             email,
             name,
-            gender
+            gender,
+            introduction
           } as any);
-          console.log("gggg");
         }
       }
     }

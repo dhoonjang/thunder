@@ -29,6 +29,9 @@ interface IProps {
   name?: string;
   onChange: any;
   className?: string;
+  min?: string;
+  max?: string;
+  maxLength?: number;
 }
 
 const Input : React.SFC<IProps> = ({ 
@@ -38,7 +41,10 @@ const Input : React.SFC<IProps> = ({
   value,
   name = "",
   onChange,
-  className
+  className,
+  min = "20",
+  max = "50",
+  maxLength = 50
 }) => (
   <Container
     className={className}
@@ -49,6 +55,9 @@ const Input : React.SFC<IProps> = ({
     placeholder={placeholder} 
     name={name}
     autoComplete={"off"}
+    min={min}
+    max={max}
+    maxLength={maxLength}
   />
 );
 

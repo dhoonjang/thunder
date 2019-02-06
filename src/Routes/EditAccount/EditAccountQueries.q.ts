@@ -4,9 +4,10 @@ export const UPDATE_PROFILE = gql`
   mutation updateProfile(
     $name: String
     $gender: String
-    $age: Int
+    $age: String
     $email: String
     $password: String
+    $introduction: String
   ) {
     UpdateMyProfile(
       name: $name
@@ -14,6 +15,7 @@ export const UPDATE_PROFILE = gql`
       email: $email
       gender: $gender
       password: $password
+      introduction: $introduction
     ) {
       ok
       error

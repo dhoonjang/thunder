@@ -43,7 +43,8 @@ const MenuButton = styled.button`
 interface IProps {
   name: string;
   email: string;
-  age: number | null;
+  age: string | null;
+  introduction: string | null;
   gender: string;
   onSubmit: MutationFn;
   onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -58,6 +59,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
   mapRef,
   age,
   gender,
+  introduction,
   email,
   onSubmit,
   onInputChange,
@@ -97,8 +99,23 @@ const EditAccountPresenter: React.SFC<IProps> = ({
             onChange={onInputChange}
             type={"email"}
             value={email}
-            placeholder={"Email"}
+            placeholder={"E-MAIL"}
             name={"email"}
+          />
+          <ExtendedInput
+            className={"age"}
+            onChange={onInputChange}
+            type={"number"}
+            value={age? age : ""}
+            placeholder={"AGE"}
+            name={"age"}
+          />
+          <ExtendedInput
+            onChange={onInputChange}
+            type={"text"}
+            value={introduction? introduction: ""}
+            placeholder={"INTRODUCTION"}
+            name={"introduction"}
           />
           <Button onClick={null} value={loading ? "Loading" : "Profile Update"} />
         </ExtendedForm>

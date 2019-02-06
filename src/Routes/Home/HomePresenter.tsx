@@ -37,10 +37,11 @@ const Body = styled.div`
   padding: 15px;
 `
 const SButton = styled(Button)`
-  margin-top: 50px;
+  margin-top: 10px;
 `
 const Name = styled.div`
   margin: 10px;
+  margin-top: 0px;
   font-size: 20px;
   font-weight: 600;
   padding: 15px;
@@ -52,6 +53,13 @@ const SSpan = styled.span`
 const Info = styled.div`
   fonst-size: 16px;
   margin: 15px;
+`
+const SInfo = styled(Info)`
+  height: 35px;
+`
+const Intro = styled.span`
+  font-size: 13px;
+  font-weight: 700;
 `
 const Icon = styled.img`
   width: 18px;
@@ -97,11 +105,23 @@ const HomePresenter: React.SFC<IProps> = ({
       <Main title={"thunder"}>
         <Body>
           <Name>{!loading? user.name : "loading"} 님</Name>
-          <Info>성별: {!loading? (user.gender === "male" ?
-            <SSpan>남성 <Icon src={Male} /></SSpan> : <SSpan>여성 <Icon src={Female} /></SSpan>): "loading"
-          }</Info>
-          <Info>나이: <SSpan>{!loading? user.age : "loading"}</SSpan></Info>
-          <Info>인증여부: {!loading? (user.isVerified ? <SSpan>O</SSpan> : <SSpan>X</SSpan>) : "loading"} </Info>
+          <Info>
+            성별: {
+              !loading? (user.gender === "male" ?
+              <SSpan>남성 <Icon src={Male} /></SSpan> : <SSpan>여성 <Icon src={Female} /></SSpan>): "loading"
+            }
+          </Info>
+          <Info>
+            나이: <SSpan>{!loading? (user.age? user.age : "없음") : "loading"}</SSpan>
+          </Info>
+          <Info>
+            인증여부: {
+              !loading? (user.isVerified ? <SSpan>O</SSpan> : <SSpan>X</SSpan>) : "loading"
+            }
+          </Info>
+          <SInfo>
+            소개: <Intro>{!loading? (user.introduction? user.introduction : "없음") : "loading"}</Intro>
+          </SInfo>
         </Body>
         <SButton value="Start" />
       </Main>

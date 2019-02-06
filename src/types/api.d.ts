@@ -18,8 +18,9 @@ export interface updateProfile {
 export interface updateProfileVariables {
   name?: string | null;
   gender?: string | null;
-  age?: number | null;
+  age?: string | null;
   email?: string | null;
+  password?: string | null;
 }
 
 /* tslint:disable */
@@ -85,6 +86,7 @@ export interface userProfile_GetMyProfile_user {
   gender: string;
   isVerified: boolean;
   isMatched: boolean;
+  introduction: string | null;
   age: number | null;
 }
 

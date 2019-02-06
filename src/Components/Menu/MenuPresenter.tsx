@@ -68,14 +68,16 @@ const Icon = styled.img`
 interface IProps {
   loading: boolean;
   data: any;
+  logOutFn: any;
 }
 
 const MenuPresenter: React.SFC<IProps> = ({
   data,
-  loading
+  loading,
+  logOutFn
 }) => (
   <Container>
-    {!loading &&
+    {!loading && data &&
       (
       <>
         <Header>
@@ -85,7 +87,7 @@ const MenuPresenter: React.SFC<IProps> = ({
         </Header>
         <SLink to="/edit-account">Edit Account</SLink>
         <SLink to="/settings">Settings</SLink>
-        <LogOutLink>Log Out</LogOutLink>
+        <LogOutLink onClick={logOutFn}>Log Out</LogOutLink>
         <AddPlace value={"Add Place"} onClick={null} />
       </>
     )}
