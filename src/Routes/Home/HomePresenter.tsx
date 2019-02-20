@@ -7,16 +7,32 @@ import Main from "src/Components/Main";
 import Button from "src/Components/Button";
 import Male from "src/images/maleicon.svg";
 import Female from "src/images/femaleicon.svg";
+import { MutationFn } from "react-apollo";
 
 const Container = styled.div``;
-
+const StatusWindow = styled.div`
+  position: absolute;
+  z-index: 3;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  margin-left: 220px;
+  margin-top: 30px;
+  width: 130px;
+  height: 40px;
+  background-color: ${props => props.theme.blueColor}
+  color: white;
+  font-size: 17px;
+  text-align: center;
+  padding-top: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
+`
 const Map = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
   opacity: 0.3;
 `;
-
 const MenuButton = styled.button`
   appearance: none;
   padding: 10px;
@@ -32,7 +48,6 @@ const MenuButton = styled.button`
   z-index: 2;
   background-color: transparent;
 `;
-
 const Body = styled.div`
   padding: 15px;
 `
@@ -71,6 +86,10 @@ interface IProps {
   mapRef: any;
   data: any;
   loading: boolean;
+  coupleStatus: string;
+  findCoupleFn: MutationFn;
+  cancelCoupleFn: MutationFn;
+  resetFn: any;
 }
 
 const HomePresenter: React.SFC<IProps> = ({
@@ -78,7 +97,11 @@ const HomePresenter: React.SFC<IProps> = ({
   toggleMenu,
   mapRef,
   data,
-  loading
+  loading,
+  findCoupleFn,
+  coupleStatus,
+  cancelCoupleFn,
+  resetFn
 }) => {
   const { GetMyProfile = {} } = data;
   const { user = null } = GetMyProfile;
@@ -103,6 +126,11 @@ const HomePresenter: React.SFC<IProps> = ({
       </Sidebar>
       <Map ref={mapRef} />
       <Main title={"thunder"}>
+        {coupleStatus === "none" ? null : 
+          <StatusWindow onClick={coupleStatus === "CANCELED"? resetFn : null}>
+            {coupleStatus}
+          </StatusWindow>
+        }
         <Body>
           <Name>{!loading? user.name : "loading"} 님</Name>
           <Info>
@@ -123,7 +151,14 @@ const HomePresenter: React.SFC<IProps> = ({
             소개: <Intro>{!loading? (user.introduction? user.introduction : "없음") : "loading"}</Intro>
           </SInfo>
         </Body>
-        <SButton value="Start" />
+        <SButton 
+          value={coupleStatus === "none" ? "Start" : "Cancel"} 
+          onClick={coupleStatus === "none" ? findCoupleFn : 
+            () => cancelCoupleFn({
+              variables: {coupleId: user.coupleId}
+            })
+          }
+        />
       </Main>
     </Container>
   )

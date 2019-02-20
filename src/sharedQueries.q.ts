@@ -13,7 +13,26 @@ export const USER_PROFILE = gql`
         isVerified
         isMatched
         introduction
+        coupleId
         age
+      }
+    }
+  }
+`;
+
+export const GET_PLACES = gql`
+  query getPlaces {
+    GetPlaces {
+      ok
+      error
+      places {
+        id
+        name
+        explanation
+        star
+        address
+        lat
+        lng
       }
     }
   }

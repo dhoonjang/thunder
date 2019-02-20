@@ -88,7 +88,7 @@ const MenuPresenter: React.SFC<IProps> = ({
         <SLink to="/edit-account">Edit Account</SLink>
         <SLink to="/settings">Settings</SLink>
         <LogOutLink onClick={logOutFn}>Log Out</LogOutLink>
-        <AddPlace value={"Add Place"} onClick={null} />
+        <Link to="/places"><AddPlace value={"Places"} onClick={null} /></Link>
       </>
     )}
   </Container>

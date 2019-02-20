@@ -24,6 +24,9 @@ const ExtendedInput = styled(Input)`
   padding-left: 20px;
   margin-bottom: 10px;
 `;
+const SInput = styled(ExtendedInput)`
+  font-size: 15px;
+`;
 const MenuButton = styled.button`
   appearance: none;
   padding: 10px;
@@ -39,7 +42,9 @@ const MenuButton = styled.button`
   z-index: 2;
   background-color: transparent;
 `;
-
+const SMain = styled(Main)`
+  height: 310px;
+`
 interface IProps {
   name: string;
   email: string;
@@ -86,7 +91,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
         {!loading ? <MenuButton onClick={toggleMenu}>|||</MenuButton> : "loading"}
       </Sidebar>
       <Map ref={mapRef} />
-      <Main title={"Edit Account"}>
+      <SMain title={"Edit Account"}>
         <ExtendedForm submitFn={onSubmit}>
           <ExtendedInput
             onChange={onInputChange}
@@ -110,7 +115,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
             placeholder={"AGE"}
             name={"age"}
           />
-          <ExtendedInput
+          <SInput
             onChange={onInputChange}
             type={"text"}
             value={introduction? introduction: ""}
@@ -119,7 +124,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
           />
           <Button onClick={null} value={loading ? "Loading" : "Profile Update"} />
         </ExtendedForm>
-      </Main>
+      </SMain>
     </Container>
   );
 

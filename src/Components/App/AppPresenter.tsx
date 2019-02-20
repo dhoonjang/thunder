@@ -6,6 +6,7 @@ import LogIn from "src/Routes/LogIn";
 import SignUp from "src/Routes/SignUp";
 import Match from "src/Routes/Match";
 import EditAccount from "src/Routes/EditAccount";
+import Places from "src/Routes/Places";
 
 interface IProps {
   isLoggedIn: boolean;
@@ -29,6 +30,7 @@ const LoggedInRoutes: React.SFC = () => (
   <Switch>
     <Route path={"/"} exact={true} component={Home} />
     <Route path={"/edit-account"} exact={true} component={EditAccount} />
+    <Route path={"/places"} exact={true} component={Places} />
     <Route path={"/match"} exact={true} component={Match} />
     <Redirect from={"*"} to={"/"} />
   </Switch>
